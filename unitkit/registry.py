@@ -32,3 +32,11 @@ ALIASES = {"meter": "m", "metre": "m", "kilometer": "km", "mile": "mi", "foot": 
 def lookup(name: str) -> Unit | None:
     key = ALIASES.get(name.strip().lower(), name.strip())
     return UNITS.get(key)
+
+
+def get_unit(name: str) -> Unit:
+    """Like lookup(), but raises ValueError for an unknown unit."""
+    unit = lookup(name)
+    if unit is None:
+        raise ValueError(f"unknown unit: {name!r}")
+    return unit
